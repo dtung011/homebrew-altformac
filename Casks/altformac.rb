@@ -2,8 +2,8 @@
 # Update `version` and `sha256` for every release
 # (scripts/package.sh prints the sha256 of the DMG it just built).
 cask "altformac" do
-  version "0.1.2"
-  sha256 "a44fa295d40a3ffcac92d0a695dcfd189e069b4f9438f297605c56ef015f1b5e"
+  version "0.1.3"
+  sha256 "55f7b390285c1c9425705ede021a87eb37dca91fa9ad6d06c2ae44379f29413f"
 
   url "https://github.com/dtung011/altformac/releases/download/v#{version}/AltForMac-#{version}.dmg"
   name "AltForMac"
@@ -20,6 +20,14 @@ cask "altformac" do
   postflight do
     system_command "/usr/bin/xattr",
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/AltForMac.app"]
+  end
+
+  # macOS keeps privacy permissions after an app is deleted, so remove AltForMac's own entries
+  # (Accessibility, Automation, ...) when it is uninstalled.
+  uninstall quit: "dev.altformac.app"
+
+  uninstall_postflight do
+    system_command "/usr/bin/tccutil", args: ["reset", "All", "dev.altformac.app"]
   end
 
   zap trash: "~/Library/Application Support/AltForMac"

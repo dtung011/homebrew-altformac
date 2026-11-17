@@ -2,8 +2,8 @@
 # Update `version` and `sha256` for every release
 # (scripts/package.sh prints the sha256 of the DMG it just built).
 cask "altformac" do
-  version "0.1.3"
-  sha256 "55f7b390285c1c9425705ede021a87eb37dca91fa9ad6d06c2ae44379f29413f"
+  version "0.1.4"
+  sha256 "b2ff08eab1e86c6b0fe2eaba90e4e827c8d38480f3b33b168092558e1ebfc5ba"
 
   url "https://github.com/dtung011/altformac/releases/download/v#{version}/AltForMac-#{version}.dmg"
   name "AltForMac"
